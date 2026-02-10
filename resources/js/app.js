@@ -4,6 +4,8 @@ import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import Layout from './Layouts/Layout.vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
+import VueDOMPurifyHTML from 'vue-dompurify-html';
+
 
 createInertiaApp({
     title: (title) => `Book My Stay | ${title}`,
@@ -17,6 +19,7 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(VueDOMPurifyHTML)
             .mount(el)
     },
     progress: {

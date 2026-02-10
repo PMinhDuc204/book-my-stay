@@ -9,7 +9,9 @@
 </script>
 
 <template>
-    <ContactList :contacts="contacts" />
+    <div class="container">
+        <ContactList :contacts="contacts" />
+    </div>
 </template>
 
 <style scoped>
