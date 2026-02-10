@@ -35,7 +35,7 @@
                             </Link>
                         </li>
                         <li>
-                            <Link :href="route('contacts.delete', contact.id)" class="dropdown-item">
+                            <Link :href="route('contacts.destroy', contact.id)" method="delete" as="button" class="dropdown-item">
                                 <i class="fas fa-trash mx-2 text-danger" style="cursor: pointer"></i>Delete
                             </Link>
                         </li>

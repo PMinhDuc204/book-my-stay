@@ -5,17 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AddContactRequest;
 use App\Models\Contact;
 use Inertia\Inertia;
-
 class ContactController extends Controller
 {
     public function create()
     {
-        return Inertia::render("Admin/Contact/Form");
+        return Inertia::render("Admin/Contact/Form", [
+            'data' => [
+                'title' => 'Add new contact',
+                'urlBack' => session()->get('home'),
+            ]
+        ]);
     }
 
     public function store(AddContactRequest $request)
     {
         $contact = new Contact();
+        $contact->user_id = auth()->user()->id;
         $contact->name = $request->name;
         $contact->email = $request->email;
         $contact->phone = $request->phone;
@@ -33,7 +38,12 @@ class ContactController extends Controller
     public function edit(Contact $contact)
     {
         return Inertia::render("Admin/Contact/Form", [
-            'contact' => $contact,
+            'data' => [
+                'title' => 'Update Contact',
+                'isEdit' => true,
+                'contact' => $contact,
+                'urlBack' => session()->get('home'),
+            ],
         ]);
     }
 
@@ -47,6 +57,7 @@ class ContactController extends Controller
         $contact->company = $request->company;
         $contact->country = $request->country;
         $contact->country_code = $request->country_code;
+        $contact->user_id = auth()->user()->id;
         $contact->save();
         return redirect()->route("home")->with([
             'message' => 'Contact updated successfully',
@@ -54,7 +65,7 @@ class ContactController extends Controller
         ]);
     }
 
-    public function delete(Contact $contact)
+    public function destroy(Contact $contact)
     {
         $contact->delete();
         return redirect()->route("home")->with([

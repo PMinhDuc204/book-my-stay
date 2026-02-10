@@ -5,7 +5,14 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import Layout from './Layouts/Layout.vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import VueDOMPurifyHTML from 'vue-dompurify-html';
+import { defineRule } from 'vee-validate';
+import * as rules from '@vee-validate/rules';
 
+Object.keys(rules).forEach(rule => {
+    if (rule != 'default' && rule != 'all') {
+        defineRule(rule, rules[rule]);
+    }
+});
 
 createInertiaApp({
     title: (title) => `Book My Stay | ${title}`,

@@ -14,4 +14,9 @@ class UserProfile extends Model
         'gender',
         'date_of_birth',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

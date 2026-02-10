@@ -45,4 +45,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
+
+    public function favoriteContacts()
+    {
+        return $this->belongsToMany(Contact::class,'favorites_pivot');
+    }
+
+    public function userProfiles()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
 }
